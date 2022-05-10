@@ -1,57 +1,77 @@
 <?php
 
-function multiplicar($largura, $comprimento) {
-    $area_total = ($largura * $comprimento);
+  require_once 'conexao.php';
 
-      if (($area_total < 50) && ($area_total > 20)) {
-          multiplicar50Menos();
+function multiplicar($larg, $comp, $tipo) {
+    $area_total = $larg * $comp;
+    
+    if ($tipo == "exposta") {
+        if ($area_total <= 20) {
+          multiplicar20MenosExposta($area_total);
+        }
+        if ($area_total > 20 && $area_total < 50) {
+          multiplicar50MenosExposta($area_total);
+        }
+        if ($area_total >= 50) {
+          multiplicar50MaisExposta($area_total);
+        }
+      }
 
-      } else if ($area_total <= 20) {
-          multiplicar20Menos();
-
-      } else {
-          multiplicar50Mais();
+      if (tipo.value == "protegida") {
+        if ($area_total <= 20) {
+          multiplicar20MenosProtegida($area_total);
+        }
+        if ($area_total > 20 && $area_total < 50) {
+          multiplicar50MenosProtegida($area_total);
+        }
+        if ($area_total >= 50) {
+          multiplicar50MaisProtegida($area_total);
+        }
       }
 
 
     }
 
 
-function multiplicar50Menos($largura, $comprimento) {
-        $area_total = ($largura * $comprimento);
+    function multiplicar50MenosProtegida($area_total) {
+
+      $sql = "select * from valores where cod_tipo = 1";
+      echo $sql;
+    }
+      /*
+      const manta3mmDesc = 557
+      const manta3mmAlum = 624
+      const manta2mmMorpl = 641
+      const plastipegante = 412
+      const diplas = 93
+      const maoDeObra = 42
 
 
-        const manta3mmDesc = 557
-        const manta3mmAlum = 624
-        const manta2mmMorpl = 641
-        const plastipegante = 412
-        const diplas = 93
-        const maoDeObra = 42 * 1.3
 
 
 
-
-
-
-     // Área com manta 3mm Desc
-      var qtdMantaMorpl = (area_total * 1.30) * 1.10 / 10
-      var qtdPlastipegante = qtdMantaMorpl / 10
-      var totalprod = qtdMantaMorpl * manta2mmMorpl + qtdPlastipegante * plastipegante
-      var totalMaodeObra = maoDeObra * area_total
+      // Área com manta 3mm Desc
+      var qtdMantaMorter = (area_total * 1.10 / 7)
+      var qtdPlastipegante = qtdMantaMorter / 10
+      var qtdDiplas = qtdMantaMorter / 10
+      var totalprod = qtdMantaMorter * manta3mmDesc + qtdPlastipegante * plastipegante + qtdDiplas * diplas
+      var totalMaodeObra = area_total * maoDeObra
       var totalOrcamento = totalprod + totalMaodeObra
       var totalMaodeObraFprmatado = totalMaodeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       var totalProdFormatado = totalprod.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       var totalOrcamentoFormatado = totalOrcamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      var qtdman = qtdMantaMorpl.toFixed(2)
+      var qtdman = qtdMantaMorter.toFixed(2)
       var qtdPl = qtdPlastipegante.toFixed(2)
-      var totalVlManta = qtdMantaMorpl * manta2mmMorpl
+      var qtdDi = qtdDiplas.toFixed(2)
+      var totalVlManta = qtdMantaMorter * manta3mmDesc
       var totalVlPlastipegante = qtdPlastipegante * plastipegante
+      var totalVlDiplas = qtdDiplas * diplas
       var totalVlMantaform = totalVlManta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       var totalVlPlastipeganteform = totalVlPlastipegante.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalVlDiplasform = totalVlDiplas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
 
-
-      res2.innerHTML = `A área deu  Total de ${area_total} m2 </p> <p> Irá utilizar: </p> ${qtdman} rolos de Manta Asfáltica Morplava Alumínio 2 mm 1,10 x 10 Mts ${totalVlMantaform}</p> <p> ${qtdPl} baldes de Primer Plastipegante ${totalVlPlastipeganteform}</p>  <p> Total de produtos  ${totalProdFormatado} </p> <p>Mão de obra ${totalMaodeObraFprmatado}</p> Total de ${totalOrcamentoFormatado}</p>`
+      res2.innerHTML = `A área deu  Total de ${area_total} m2 </p> <p> Irá utilizar: </p> ${qtdman} rolos de Manta Asfáltica Morteplas 3 mm 1,10 x 7 Mts ${totalVlMantaform}</p> <p> ${qtdPl} baldes de Plastipegante ${totalVlPlastipeganteform}</p> <p> ${qtdDi} Sacos de Argamassa Extra Forte Diplas ${totalVlDiplasform} </p> <p> Total de produtos  ${totalProdFormatado} </p> <p>Mão de obra ${totalMaodeObraFprmatado}</p> Total de ${totalOrcamentoFormatado}</p>`
 
 
 
@@ -59,45 +79,57 @@ function multiplicar50Menos($largura, $comprimento) {
     }
 
 
-function multiplicar50Mais() {
-    var med1 = window.document.getElementById('largura')
-      var med2 = window.document.getElementById('comprimento')
+    function multiplicar50MenosExposta() {
+      var med1 = window.document.getElementById('largura2')
+      var med2 = window.document.getElementById('comprimento2')
+      
       var l1 = Number(med1.value)
       var c1 = Number(med2.value)
+      var name = String(nome.value)
+      var tel = Number(telefone.value)
+      var end = String(endereco.value)
+      var cidade1 = String(cidade.value)
+      var est = String(estado.value)
+      
+      
       var area_total = l1 * c1
+      
+      
 
 
-     const manta3mmDesc = 624
-      const manta3mmAlum = 669
-      const manta2mmMorpl = 419.17
-      const plastipegante = 279.73
-      const diplas = 61.85
-      const maoDeObra = 42 * 1.3
+      const manta3mmDesc = 557
+      const manta3mmAlum = 624
+      const manta2mmMorpl = 641
+      const plastipegante = 412
+      const diplas = 93
+      const maoDeObra = 42
 
 
 
 
 
-
-     // Área com manta 3mm Desc
-      var qtdMantaMorpl = Math.ceil((area_total * 1.30) * 1.10 / 10)
-      var qtdPlastipegante = Math.ceil(qtdMantaMorpl / 10)
-      var totalprod = Math.ceil(qtdMantaMorpl * manta2mmMorpl + qtdPlastipegante * plastipegante)
-      var totalMaodeObra = maoDeObra * area_total
+      // Área com manta 3mm Desc
+      var qtdMantaMorter = (area_total * 1.15 / 7)
+      var qtdPlastipegante = qtdMantaMorter / 10
+      var qtdDiplas = qtdMantaMorter / 10
+      var totalprod = qtdMantaMorter * manta3mmAlum + qtdPlastipegante * plastipegante
+      var totalMaodeObra = area_total * maoDeObra
       var totalOrcamento = totalprod + totalMaodeObra
       var totalMaodeObraFprmatado = totalMaodeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       var totalProdFormatado = totalprod.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       var totalOrcamentoFormatado = totalOrcamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      var qtdman = qtdMantaMorpl.toFixed(2)
+      var qtdman = qtdMantaMorter.toFixed(2)
       var qtdPl = qtdPlastipegante.toFixed(2)
-      var totalVlManta = qtdMantaMorpl * manta2mmMorpl
+      var qtdDi = qtdDiplas.toFixed(2)
+      var totalVlManta = qtdMantaMorter * manta3mmAlum
       var totalVlPlastipegante = qtdPlastipegante * plastipegante
+      var totalVlDiplas = qtdDiplas * diplas
       var totalVlMantaform = totalVlManta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       var totalVlPlastipeganteform = totalVlPlastipegante.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalVlDiplasform = totalVlDiplas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
 
-
-      res2.innerHTML = `A área deu  Total de ${area_total} m2 </p> <p> Irá utilizar: </p> ${qtdman} rolos de Manta Asfáltica Morplava Alumínio 2 mm 1,10 x 10 Mts ${totalVlMantaform}</p> <p> ${qtdPl} baldes de Primer Plastipegante ${totalVlPlastipeganteform}</p>  <p> Total de produtos  ${totalProdFormatado} </p> <p>Mão de obra ${totalMaodeObraFprmatado}</p> Total de ${totalOrcamentoFormatado}</p>`
+      res2.innerHTML = `Nome: ${name} </p> Endereço: ${end}</p> Cidade: ${cidade1} </p> Estado: ${est} </p> Telefone: ${tel} </p> A área deu  Total de ${area_total} m2 </p> <p> Irá utilizar: </p> ${qtdman} rolos de Manta Asfáltica Morterplas Alumínio 3 mm 1,10 x 7 mts ${totalVlMantaform}</p> <p> ${qtdPl} baldes de Primer Plastipegante ${totalVlPlastipeganteform}</p>  <p> Total de produtos  ${totalProdFormatado} </p> <p>Mão de obra ${totalMaodeObraFprmatado}</p> Total de ${totalOrcamentoFormatado}</p>`
 
 
 
@@ -105,16 +137,16 @@ function multiplicar50Mais() {
     }
 
 
-function multiplicar20Menos() {
-    var med1 = window.document.getElementById('largura')
-      var med2 = window.document.getElementById('comprimento')
+    function multiplicar20MenosExposta() {
+      var med1 = window.document.getElementById('largura2')
+      var med2 = window.document.getElementById('comprimento2')
       var l1 = Number(med1.value)
       var c1 = Number(med2.value)
       var area_total = l1 * c1
 
 
-     const manta3mmDesc = 624
-      const manta3mmAlum = 669
+      const manta3mmDesc = 557
+      const manta3mmAlum = 624
       const manta2mmMorpl = 641
       const plastipegante = 412
       const diplas = 93
@@ -124,24 +156,158 @@ function multiplicar20Menos() {
 
 
 
-
-     // Área com manta 3mm Desc
-      var qtdMantaMorpl = (area_total * 1.30) * 1.10 / 10
-      var qtdPlastipegante = qtdMantaMorpl / 10
-      var totalprod = qtdMantaMorpl * manta2mmMorpl + qtdPlastipegante * plastipegante
+      // Área com manta 3mm Desc
+      var qtdMantaMorter = (area_total * 1.15 / 7)
+      var qtdPlastipegante = qtdMantaMorter / 10
+      var qtdDiplas = qtdMantaMorter / 10
+      var totalprod = qtdMantaMorter * manta3mmAlum + qtdPlastipegante * plastipegante
       var totalMaodeObra = maoDeObra
       var totalOrcamento = totalprod + totalMaodeObra
       var totalMaodeObraFprmatado = totalMaodeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       var totalProdFormatado = totalprod.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       var totalOrcamentoFormatado = totalOrcamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      var qtdman = qtdMantaMorpl.toFixed(2)
+      var qtdman = qtdMantaMorter.toFixed(2)
       var qtdPl = qtdPlastipegante.toFixed(2)
-      var totalVlManta = qtdMantaMorpl * manta2mmMorpl
+      var qtdDi = qtdDiplas.toFixed(2)
+      var totalVlManta = qtdMantaMorter * manta3mmAlum
       var totalVlPlastipegante = qtdPlastipegante * plastipegante
+      var totalVlDiplas = qtdDiplas * diplas
       var totalVlMantaform = totalVlManta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       var totalVlPlastipeganteform = totalVlPlastipegante.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalVlDiplasform = totalVlDiplas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+
+      res2.innerHTML = `A área deu  Total de ${area_total} m2 </p> <p> Irá utilizar: </p> ${qtdman} rolos de Manta Asfáltica Morterplas Alumínio 3 mm 1,10 x 7 mts ${totalVlMantaform}</p> <p> ${qtdPl} baldes de Primer Plastipegante ${totalVlPlastipeganteform}</p>  <p> Total de produtos  ${totalProdFormatado} </p> <p>Mão de obra ${totalMaodeObraFprmatado}</p> Total de ${totalOrcamentoFormatado}</p>`
 
 
 
-      res2.innerHTML = `A área deu  Total de ${area_total} m2 </p> <p> Irá utilizar: </p> ${qtdman} rolos de Manta Asfáltica Morplava Alumínio 2 mm 1,10 x 10 Mts ${totalVlMantaform}</p> <p> ${qtdPl} baldes de Primer Plastipegante ${totalVlPlastipeganteform}</p>  <p> Total de produtos  ${totalProdFormatado} </p> <p>Mão de obra ${totalMaodeObraFprmatado}</p> Total de ${totalOrcamentoFormatado}</p>`
+    }
 
+    function multiplicar50MaisProtegida() {
+      var med1 = window.document.getElementById('largura2')
+      var med2 = window.document.getElementById('comprimento2')
+      var l1 = Number(med1.value)
+      var c1 = Number(med2.value)
+      var area_total = l1 * c1
+
+      const manta3mmDesc = 376.16
+      const manta3mmAlum = 422.43
+      const manta2mmMorpl = 435.50
+      const plastipegante = 279.73
+      const diplas = 61.85
+      const maoDeObra = 42
+
+
+
+
+      // Área com manta 3mm Desc
+      var qtdMantaMorter = Math.ceil(area_total * 1.10 / 7)
+      var qtdPlastipegante = Math.ceil(qtdMantaMorter / 10)
+      var qtdDiplas = Math.ceil(qtdMantaMorter / 10)
+      var totalprod = qtdMantaMorter * manta3mmDesc + qtdPlastipegante * plastipegante + qtdDiplas * diplas
+      var totalMaodeObra = area_total * maoDeObra
+      var totalOrcamento = totalprod + totalMaodeObra
+      var totalMaodeObraFprmatado = totalMaodeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalProdFormatado = totalprod.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalOrcamentoFormatado = totalOrcamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var qtdman = qtdMantaMorter.toFixed(2)
+      var qtdPl = qtdPlastipegante.toFixed(2)
+      var qtdDi = qtdDiplas.toFixed(2)
+      var totalVlManta = qtdMantaMorter * manta3mmDesc
+      var totalVlPlastipegante = qtdPlastipegante * plastipegante
+      var totalVlDiplas = qtdDiplas * diplas
+      var totalVlMantaform = totalVlManta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalVlPlastipeganteform = totalVlPlastipegante.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalVlDiplasform = totalVlDiplas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+
+      res2.innerHTML = `A área deu  Total de ${area_total} m2 </p> <p> Irá utilizar: </p> ${qtdman} rolos de Manta Asfáltica Morteplas 3 mm 1,10 x 7 Mts ${totalVlMantaform}</p> <p> ${qtdPl} baldes de Primer Plastipegante ${totalVlPlastipeganteform}</p> <p> ${qtdDi} Sacos de Argamassa Extra Forte Diplas ${totalVlDiplasform} </p> <p> Total de produtos  ${totalProdFormatado} </p> <p>Mão de obra ${totalMaodeObraFprmatado}</p> Total de ${totalOrcamentoFormatado}</p>`
+
+
+
+    }
+
+    function multiplicar50MaisExposta() {
+      var med1 = window.document.getElementById('largura2')
+      var med2 = window.document.getElementById('comprimento2')
+      var l1 = Number(med1.value)
+      var c1 = Number(med2.value)
+      var area_total = l1 * c1
+
+      const manta3mmDesc = 376.16
+      const manta3mmAlum = 422.43
+      const manta2mmMorpl = 435.50
+      const plastipegante = 279.73
+      const diplas = 61.85
+      const maoDeObra = 42
+
+
+
+
+      // Área com manta 3mm Desc
+      var qtdMantaMorter = Math.ceil(area_total * 1.15 / 7)
+      var qtdPlastipegante = Math.ceil(qtdMantaMorter / 10)
+      var qtdDiplas = Math.ceil(qtdMantaMorter / 10)
+      var totalprod = qtdMantaMorter * manta3mmAlum + qtdPlastipegante * plastipegante
+      var totalMaodeObra = area_total * maoDeObra
+      var totalOrcamento = totalprod + totalMaodeObra
+      var totalMaodeObraFprmatado = totalMaodeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalProdFormatado = totalprod.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalOrcamentoFormatado = totalOrcamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var qtdman = qtdMantaMorter.toFixed(2)
+      var qtdPl = qtdPlastipegante.toFixed(2)
+      var qtdDi = qtdDiplas.toFixed(2)
+      var totalVlManta = qtdMantaMorter * manta3mmAlum
+      var totalVlPlastipegante = qtdPlastipegante * plastipegante
+      var totalVlDiplas = qtdDiplas * diplas
+      var totalVlMantaform = totalVlManta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalVlPlastipeganteform = totalVlPlastipegante.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalVlDiplasform = totalVlDiplas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+
+      res2.innerHTML = `A área deu  Total de ${area_total} m2 </p> <p> Irá utilizar: </p> ${qtdman} rolos de Manta Asfáltica Morterplas Alumínio 3 mm 1 x 7 mts ${totalVlMantaform}</p> <p> ${qtdPl} baldes de Primer Plastipegante ${totalVlPlastipeganteform}</p>  <p> Total de produtos  ${totalProdFormatado} </p> <p>Mão de obra ${totalMaodeObraFprmatado}</p> Total de ${totalOrcamentoFormatado}</p>`
+
+
+
+    }
+
+    function multiplicar20MenosProtegida() {
+      var med1 = window.document.getElementById('largura2')
+      var med2 = window.document.getElementById('comprimento2')
+      var l1 = Number(med1.value)
+      var c1 = Number(med2.value)
+      var area_total = l1 * c1
+
+
+      const manta3mmDesc = 557
+      const manta3mmAlum = 624
+      const manta2mmMorpl = 641
+      const plastipegante = 412
+      const diplas = 93
+      const maoDeObra = 800
+
+
+
+
+
+      // Área com manta 3mm Desc
+      var qtdMantaMorter = (area_total * 1.10 / 7)
+      var qtdPlastipegante = qtdMantaMorter / 10
+      var qtdDiplas = qtdMantaMorter / 10
+      var totalprod = qtdMantaMorter * manta3mmDesc + qtdPlastipegante * plastipegante + qtdDiplas * diplas
+      var totalMaodeObra = maoDeObra
+      var totalOrcamento = totalprod + totalMaodeObra
+      var totalMaodeObraFprmatado = totalMaodeObra.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalProdFormatado = totalprod.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalOrcamentoFormatado = totalOrcamento.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var qtdman = qtdMantaMorter.toFixed(2)
+      var qtdPl = qtdPlastipegante.toFixed(2)
+      var qtdDi = qtdDiplas.toFixed(2)
+      var totalVlManta = qtdMantaMorter * manta3mmDesc
+      var totalVlPlastipegante = qtdPlastipegante * plastipegante
+      var totalVlDiplas = qtdDiplas * diplas
+      var totalVlMantaform = totalVlManta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalVlPlastipeganteform = totalVlPlastipegante.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      var totalVlDiplasform = totalVlDiplas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+*/
