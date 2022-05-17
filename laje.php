@@ -29,7 +29,7 @@ if (isset($_POST['botao'])){
 <body>
   <header class="cabecalho">
     <h1>Orçamento de Laje</h1>
-    <a href="index.html"><img src="imagens/home.svg" alt=""></a>
+    <a href="index1.html"><img src="imagens/home.svg" alt=""></a>
   </header>
 
   <form class="formulario" method="POST">
