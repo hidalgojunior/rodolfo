@@ -2,6 +2,16 @@
 
   require_once 'conexao.php';
 
+  function tipo(){
+    $sql = "select * from tipo";
+
+    $result = mysqli_query($con,$sql);
+
+    echo "<pre>";
+    print_r($result);
+    echo "</pre>";
+    
+  }
 
   function multiplicar50Menos($area_total, $manta3D,$manta3A,$manta2M,$plast,$dip,$mo)
   {
@@ -37,7 +47,7 @@
 
     return $res2 = 'A área deu  Total de '.$area_total.' m2 </p> <p> Irá utilizar: </p> '.$qtdman.' rolos de Manta Asfáltica Morterplas 3 mm 1,10 x 7 Mts '.$totalVlMantaform.'</p> <p> '.$qtdPl.' baldes de Primer Plastipegante '.$totalVlPlastipeganteform.'</p> <p> '.$qtdDi.' Sacos de Argamassa Extra Forte Diplas '.$totalVlDiplasform.' </p> <p> Total de produtos  '.$totalProdFormatado.' </p> <p>Mão de obra '.$totalMaodeObraFprmatado.'</p> Total de '.$totalOrcamentoFormatado.'</p>`;
     }
-  
+  /*
 //
 //function multiplicar($larg, $comp, $tipo) {
 //    $area_total = $larg * $comp;
