@@ -12,7 +12,7 @@
 <body>
   <header class="cabecalho">
     <h1>Orçamento de Muro</h1>
-    <a href="index1.html"><img src="imagens/home.svg" alt=""></a>
+    <a href="index.php"><img src="imagens/home.svg" alt=""></a>
   </header>
 
   <form class="formulario" onsubmit="event.preventDefault(); multiplicar();">

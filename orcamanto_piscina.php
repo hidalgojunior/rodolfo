@@ -59,7 +59,8 @@ if (isset($_POST['calcular'])) {
 <body>
 <header class="cabecalho">
     <h1>Orçamento de Piscina</h1>
-    <a href="index1.html"><img src="imagens/home.svg" alt=""></a>
+    <a href="index.php"><img src="imagens/home.svg" alt=""></a>
+
 </header>
 
 <form class="formulario" method="post">

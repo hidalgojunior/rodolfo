@@ -23,6 +23,6 @@
     <a href="orcamanto_piscina.php"><img src="imagens/piscina.jpg" alt="">Piscina</a>
     <a href="orcamanto_reserv_cil.php"><img src="imagens/reservatorio.jpg" alt="">Cilindrico Reservatório</a>
 </nav>
-
+<a href="tabela.php" class="link">Tabela de Calculo de Superficies</a>
 </body>
 </html>
