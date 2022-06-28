@@ -17,11 +17,11 @@
 <h1>Calculadora de Orçamentos</h1>
 
 <nav class="menu">
-    <a href="orcamanto_muro.php"><img src="imagens/Muro.jpg" alt="">Muro</a>
-    <a href="orcamanto_laje.php"><img src="imagens/Laje.png" alt="">Laje</a>
-    <a href="orcamanto_telhado.php"><img src="imagens/Telhado.jpg" alt="">Telhado</a>
-    <a href="orcamanto_piscina.php"><img src="imagens/piscina.jpg" alt="">Piscina</a>
-    <a href="orcamanto_reserv_cil.php"><img src="imagens/reservatorio.jpg" alt="">Cilindrico Reservatório</a>
+    <a href="orcamanto_muro.php?tipo=1"><img src="imagens/Muro.jpg" alt="">Muro</a>
+    <a href="orcamanto_laje.php?tipo=2"><img src="imagens/Laje.png" alt="">Laje</a>
+    <a href="orcamanto_telhado.php?tipo=3"><img src="imagens/Telhado.jpg" alt="">Telhado</a>
+    <a href="orcamanto_piscina.php?tipo=4"><img src="imagens/piscina.jpg" alt="">Piscina</a>
+    <a href="orcamanto_reserv_cil.php?tipo=5"><img src="imagens/reservatorio.jpg" alt="">Cilindrico Reservatório</a>
 </nav>
 <a href="tabela.php" class="link">Tabela de Calculo de Superficies</a>
 </body>

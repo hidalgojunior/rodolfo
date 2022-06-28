@@ -1,4 +1,10 @@
 <?php
+
+if (isset($_GET['tipo'])){
+  $tipo = $_GET['tipo'];
+}
+?>
+<?php
 file_exists('conexao.php') ? require_once 'conexao.php' : '';
 file_exists('funcoes.php') ? require_once 'funcoes.php' : '';
     $id_sup = 4;

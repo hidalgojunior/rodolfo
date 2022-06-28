@@ -1,3 +1,9 @@
+<?php
+
+if (isset($_GET['tipo'])){
+  $tipo = $_GET['tipo'];
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
